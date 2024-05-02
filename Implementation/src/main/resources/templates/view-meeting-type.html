@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Meeting Types</title>
+    <link href="/css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container">
+    <div class="mtype-form-all-div">
+        <div th:each= "mtype : ${allmtypes}" class="mtype-form-ind-div">
+            <h3 th:text="${mtype.meetingTypeName}"></h3>
+            <p th:if="${mtype.quorumRequired == true}" th:text="'Percentage required for quorum - ' + ${mtype.quorumNum} + '%'"></p>
+
+            <p th:text="'Number of days notice required - ' + ${mtype.daysNotice}"></p>
+            <p th:if="${mtype.recurringMeeting == true}"> <span th:text="'Meeting Frequency - Every ' + ${mtype.recurringFreqValNum}"></span>
+                <span th:switch="${mtype.recurringFreqValText}">
+                    <span th:case="Day_freq">Day</span>
+                    <span th:case="Week_freq">Week</span>
+                    <span th:case="Month_freq">Month</span>
+                    <span th:case="Year_freq">Year</span>
+
+            </span>/s</span>
+            </p>
+
+            <p th:text="'Last Held - ' + ${#temporals.format(mtype.lastMeetingOfTypeDate, 'EEEE d MMMM yyyy HH:mm')}"></p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

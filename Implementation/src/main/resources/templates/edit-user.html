@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet">
+<head>
+  <title>Edit User</title>
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container">
+  <h1>Edit User</h1>
+  <div th:if="${addUserMessage != null}" class="editUser-message">
+    <h3><span th:text="${addUserMessage}"></span></h3>
+  </div>
+  <form th:action="@{'/admin/users/' + ${tempUserToEdit.id} + '/edit'}" method="post" th:object="${tempUserToEdit}">
+    <label>First name:</label>
+    <input type="text" th:field="*{firstName}" required/>
+    <br/>
+    <label>Surname:</label>
+    <input type="text" th:field="*{surname}" required/>
+    <br/>
+    <label>Email:</label>
+    <input type="text" th:field="*{email}" required/>
+    <br/>
+    <label>Username:</label>
+    <input type="text" th:field="*{username}" required/>
+    <br/>
+    <label>Change Password (Leave blank to keep existing password):</label>
+    <input type="text" th:field="*{password}"/>
+    <br/>
+    <label for="roles">Select Role:</label><br>
+    <select id="roles" name="roles">
+      <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}" th:selected="${userToEditRole == role.id}"></option>
+    </select>
+    <br/>
+
+    <input type="submit" value="Submit" />
+  </form>
+</div>
+
+</body>
+</html>

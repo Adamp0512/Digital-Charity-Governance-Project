@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet">
+<head>
+  <title>Meeting Details</title>
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container">
+  <h1>Meeting Details</h1>
+  <form th:action="@{'/meetings/' + ${meeting.id} + '/edit'}" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" th:value="${meeting.title}">
+    <br>
+    <label for="date">Date:</label>
+    <input type="datetime-local" id="date" name="dateTime" th:value="${formattedDateTime != null ? formattedDateTime : ''}">
+
+    <br>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" th:value="${meeting.location}">
+    <br>
+    <div class="container">
+    <label for="meetingCompleteCheckbox">Mark this meeting as complete? </label>
+    <input type="checkbox" id="meetingCompleteCheckbox" name="meetingCompleteCheckbox" th:checked="${meeting.meetingComplete}">
+    </div>
+    <br>
+    <input type="submit" value="Save Meeting Details">
+  </form>
+
+  <h2>Actions</h2>
+  <ul>
+    <li th:each="action : ${meetingActions}">
+      [[${action.actionInfo}]] - [[${action.timestamp}]]
+    </li>
+  </ul>
+
+  <h2>Add Action</h2>
+  <form th:action="@{'/meetings/' + ${meeting.id} + '/addAction'}" method="post">
+    <input type="text" name="actionInfo" required>
+    <input type="submit" value="Add Action">
+  </form>
+
+  <br>
+  <a class="button-link wide" th:href="@{/meetings/list}">Back To Meeting List</a>
+</div>
+</body>
+</html>

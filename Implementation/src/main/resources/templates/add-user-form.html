@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet" >
+
+<head>
+    <title>Add User</title>
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+
+<div class="container">
+    <h1>Manage Charity</h1>
+    <div th:if="${charityCount == 0}" class="addCharityOptions">
+        <a class="button-link" th:href="@{/admin/charity/add}">Add Charity</a>
+    </div>
+    <div th:if="${charityCount != 0}" class="editCharityOptions">
+        <a class="button-link" th:href="@{/admin/charity/{id}(id=${charityID})}">Add/Amend Charitable Purposes </a>
+        <a class="button-link" th:href="@{/admin/delete}" onclick="return confirm('This action will DELETE EVERYTHING except admin user accounts (which can be manually deleted)')">Remove Charity & Delete All Data</a>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <h1>Manage Users</h1>
+    <h2>Add new User</h2>
+    <div th:if="${addUserMessage != null}" class="addUser-message">
+        <h3><span th:text="${addUserMessage}"></span></h3>
+    </div>
+    <form action="/admin/users/add" method="post" th:object="${user}">
+        <label>First name:</label>
+        <input type="text" th:field="*{firstName}" required/>
+        <br/>
+        <label>Surname:</label>
+        <input type="text" th:field="*{surname}" required/>
+        <br/>
+        <label>Email:</label>
+        <input type="text" th:field="*{email}" required/>
+        <br/>
+        <label>Username:</label>
+        <input type="text" th:field="*{username}" required/>
+        <br/>
+        <label>Password:</label>
+        <input type="text" th:field="*{password}" required/>
+        <br/>
+        <label for="roles">Select Role:</label><br>
+        <select id="roles" name="roles">
+            <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}"></option>
+        </select>
+        <br/>
+
+        <input type="submit" value="Submit" />
+    </form>
+    <br>
+    <hr>
+    <h2>All Users</h2>
+    <a class="button-link" th:href="@{/admin/users/all}">View and Edit Users</a>
+
+
+
+</div>
+<div class="container">
+    <a id="admin-roles"></a>
+    <h1>Manage Roles</h1>
+    <h2>Add New Role</h2>
+    <div th:if="${addRoleMessage != null}" class="addRole-message">
+        <h3><span th:text="${addRoleMessage}"></span></h3>
+    </div>
+    <form action="/admin/roles/add" method="post" th:object="${role}">
+        <label>Role name:</label>
+        <input type="text" th:field="*{name}" required/>
+        <br/>
+        <input type="submit" value="Submit" />
+    </form>
+    <br>
+    <h2>Edit Roles</h2>
+    <div th:if="${roleMessage != null}" class="role-message">
+        <h3><span th:text="${roleMessage}"></span></h3>
+    </div>
+    <div class="role-form-all-div">
+        <div th:each= "role : ${allRoles}" class="role-form-ind-div">
+            <form th:action="@{/admin/roles/update/{id}(id=${role.id})}" method="post">
+                <input type="text" th:value="${role.name}" name="newRoleName" required/>
+                <button type="submit">Update</button>
+            </form>
+            <form th:action="@{/admin/roles/delete/{id}(id=${role.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+            <form th:action="@{/admin/roles/delete/confirm/{id}(id=${role.id})}" method="post" th:if="${role.id == deletePendingId and confirmDeletion}">
+                <button type="submit" onclick="return confirm('This action will delete the selected role and any users that have that role.')">Confirm Deletion</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+</html>

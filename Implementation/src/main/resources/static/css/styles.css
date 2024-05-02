@@ -1,0 +1,214 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d46666;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styles for bulletin list */
+.bulletin-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.bulletin-list li {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Example CSS */
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.button-link:hover {
+    background-color: #0056b3;
+}
+
+.meeting-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.meeting-details {
+    flex-grow: 1;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+}
+
+.edit-button,
+.delete-button {
+    margin-left: 10px;
+    padding: 30px 50px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.role-form-all-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px
+
+}
+.role-form-ind-div {
+    border: 2px solid #0c1a99;
+    border-radius: 10px;
+    padding: 4px
+}
+
+.user-form-all-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px
+
+}
+.user-form-ind-div {
+    border: 2px solid #0c1a99;
+    border-radius: 10px;
+    padding: 4px
+}
+
+.mtype-form-all-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px
+
+}
+.mtype-form-ind-div {
+    border: 2px solid #0c1a99;
+    border-radius: 10px;
+    padding: 4px
+}
+
+.navbar-container {
+    width: 80%;
+    margin: 5px auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.navbar a {
+    margin: 5px;
+}
+.left-side-nav{
+    display:flex
+}
+.right-side-nav{
+    margin-left: auto;
+}
+
+.meeting-due-alert{
+    padding: 20px;
+    background-color: red;
+    color: black;
+    margin-bottom: 15px;
+}
+.alert-close-button{
+    margin-left: 10px;
+    color: white;
+    float: right;
+    font-size: 22px;
+    line-height: 20px
+    cursor: pointer;
+    transition: 0.2s;
+}
+.alert-close-button:hover{
+    color: black;
+}
+
+@media screen and (max-width: 600px) {
+    .meeting-entry {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .button-group {
+        margin-top: 10px; /* Adjust spacing */
+    }
+
+    .edit-button,
+    .delete-button {
+        display: block;
+        margin-top: 5px; /* Adjust spacing */
+        margin-left: 0;
+    }
+}

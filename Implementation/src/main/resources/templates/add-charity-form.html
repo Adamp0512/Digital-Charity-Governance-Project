@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet" >
+
+<head>
+    <title>Add Charity</title>
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+
+<div class="container">
+    <h1>Add Charity</h1>
+
+    <form action="/admin/charity/add/add-charity" method="post" th:object="${charity}">
+        <label>Charity Name</label>
+        <input type="text" th:field="*{charityName}" required/>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+<br>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Meeting</title>
+    <link href="/css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container">
+    <h1>Schedule New Meeting</h1>
+    <form action="#" th:action="@{/meetings/new}" th:object="${meeting}" method="post">
+
+        <label for="mtypes">Select Meeting Type:</label><br>
+        <select id="mtypes" name="mtypes">
+            <option th:each="meetingType : ${allMeetingTypes}" th:value="${meetingType.id}" th:text="${meetingType.meetingTypeName}"></option>
+        </select>
+
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" />
+        <label>Date and Time:</label>
+        <input type="datetime-local" th:field="*{dateTime}" />
+        <label>Location:</label>
+        <input type="text" th:field="*{location}" />
+
+
+        <ul>
+            <li th:each="role : ${allRolesNames}">
+                <input type="checkbox"th:value="${role}" name="selectedRoleNames" id="${'checkbox_' + option}"/>
+                <label th:for="${'checkbox_' + role}" th:text="${role}">Role: </label>
+            </li>
+        </ul>
+
+        <input type="submit" value="Create" />
+    </form>
+</div>
+</body>
+</html>

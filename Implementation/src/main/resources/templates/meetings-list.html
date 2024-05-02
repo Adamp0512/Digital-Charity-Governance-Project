@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet">
+
+<head>
+  <title>Meetings List</title>
+
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+<div class="container">
+  <div th:each="mtype : ${mtypesDue}">
+    <div class="meeting-due-alert">
+      <span class="alert-close-button" onclick="this,parentElement.style.display='none';">&times;</span>
+      <span th:text="'Meeting needed for type - ' + ${mtype[0].meetingTypeName} + '. Next meeting due date - '"></span><span th:text="${#temporals.format(mtype[1], 'EEEE d MMMM yyyy HH:mm')}"></span><span th:text="'. This meeting type requires ' + ${mtype[2]} + ' days notice.'"></span>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h1>Meetings Bulletin</h1>
+  <a class="button-link" th:href="@{/meetings/new}">Schedule New Meeting</a>
+  <a class="button-link" th:href="@{/meetings/add-meeting-type}">Add New Meeting Type</a>
+  <a class="button-link" th:href="@{/meetings/view-meeting-types}">View Meeting Types</a>
+  <br />
+
+  <div th:each="meeting : ${meetings}" class="meeting-entry">
+    <div class="meeting-details">
+      <h2 th:text="${meeting.title}"></h2>
+      <p th:if="${meeting.dateTime != null}" th:text="${#temporals.format(meeting.dateTime, 'EEEE d MMMM yyyy')}"></p>
+      <p th:if="${meeting.dateTime != null}" th:text="${#temporals.format(meeting.dateTime, 'HH:mm')}"></p>
+      <p th:if="${meeting.location != null}" th:text="${meeting.location}"></p>
+      <p th:if="${meeting.meetingType.quorumRequired}">Quorum - <span th:text="${T(com.example.digitalcharitygovernance.services.QuorumCalcService).calculateQuorumValue(meeting, allUsers)}"></span> of <span th:text="${T(com.example.digitalcharitygovernance.services.QuorumCalcService).numInvited(meeting, allUsers)}"></span> invited</p>
+    </div>
+    <div class="button-group">
+      <a class="edit-button" th:href="@{/meetings/{id}(id=${meeting.id})}" th:if="${meeting.meetingComplete == false}">Complete Meeting</a>
+      <a class="delete-button" th:href="@{/meetings/delete/{id}(id=${meeting.id})}"
+         onclick="return confirm('Are you sure you want to delete this meeting?')" th:if="${meeting.meetingComplete == false}">Delete</a>
+      <a class="edit-button" th:href="@{/meetings/{id}/download-meeting-pdf(id=${meeting.id})}" th:if="${meeting.meetingComplete == true}">Download Meeting Overview</a>
+
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>

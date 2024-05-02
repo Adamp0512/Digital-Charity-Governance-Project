@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>th_fragments</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:fragment="navbar">
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="left-side-nav">
+                <a class="back-button" th:if="${backAddress != null}" th:href="@{'/' + ${backAddress}}">Back</a>
+                <a th:href="@{/home}">Home</a>
+                <a th:href="@{/meetings/list}">Meetings</a>
+            </div>
+            <div class="right-side-nav">
+                <a th:href="@{/logout}" onclick="return confirm('Are you sure you wish to logout?')">Logout</a>
+            </div>
+        </nav>
+    </div>
+
+</header>
+
+</body>
+</html>

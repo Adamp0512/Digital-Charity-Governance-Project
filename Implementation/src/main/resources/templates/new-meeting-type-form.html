@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Meeting Type</title>
+    <link href="/css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container">
+    <form action="/meetings/add-new-meeting-type" method="post" th:object="${meetingType}">
+        <h2>Add A New Type of Meeting</h2>
+        <br>
+        <label>Type of meeting (Trustee Meeting, AGM Etc.)?
+            <input type="text" th:field="*{meetingTypeName}" required/></label>
+        <br>
+        <label for="quorum-required-box">Is a quorum required?
+            <input type="checkbox" id="quorum-required-box" name="quorum-required-box" th:checked="${quorumRequired}"></label>
+        <br>
+        <label>What is the quorum percentage required for this type of meeting to be voted upon
+            <input type="text" th:field="*{quorumNum}"/></label>
+        <br>
+        <label>How many days notice must be given for this type of meeting
+            <input type="text" th:field="*{daysNotice}"/></label>
+        <br><br>
+        <label for="recurring-meeting-box">Is this a recurring meeting? After creating a meeting of this type you will be reminded when the next meeting should be organised (with any days notice accounted for).
+            <input type="checkbox" id="recurring-meeting-box" name="recurring-meeting-box" th:checked="${recurringMeeting}"></label>
+        <label>If So - How often should this type of meeting be held?</label>
+        <label>Meeting frequency - </label>
+        <br><br>
+        <label>Every</label>
+        <input type="text" th:field="*{recurringFreqValNum}"/> <select th:field="*{recurringFreqValText}">
+        <option value="Day_freq">Day/s</option>
+        <option value="Week_freq">Week/s</option>
+        <option value="Month_freq">Month/s</option>
+        <option value="Year_freq">Year/s</option>
+    </select>
+        <label></label>
+        <br><br>
+        <input type="submit" value="Submit" />
+
+
+
+    </form>
+</div>
+</body>
+</html>

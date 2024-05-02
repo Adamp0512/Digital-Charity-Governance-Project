@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet">
+
+<head>
+  <title>Users List</title>
+
+</head>
+
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container">
+  <h1>All Users</h1>
+  <div th:if="${userMessage != null}" class="user-message">
+    <h3><span th:text="${userMessage}"></span></h3>
+  </div>
+
+  <form th:action="@{/admin/users/search}" method="get">
+    <input type="text" name="search_query" placeholder="Search">
+    <button type="submit">
+      Search
+    </button>
+  </form>
+  <form th:action="@{/admin/users/all}" method="get">
+    <button type="submit">
+      Clear
+    </button>
+
+  </form>
+
+  <br>
+
+
+  <div class="user-form-all-div">
+    <div th:each= "user : ${users}" class="user-form-ind-div">
+      <p th:text="'Name - ' + ${user.firstName} + ' ' + ${user.surname}"></p>
+      <p th:text="'Email - ' + ${user.email}"></p>
+      <p th:text="'Role - ' + ${user.role.name}"></p>
+      <form th:action="@{/admin/users/update/{id}(id=${user.id})}" method="post">
+        <button type="submit">Update</button>
+      </form>
+      <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" method="post">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

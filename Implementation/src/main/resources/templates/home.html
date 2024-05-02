@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/styles.css" rel="stylesheet">
+
+<head>
+  <title>Home</title>
+
+</head>
+<body>
+
+<header th:replace="~{th_fragments :: navbar}"></header>
+
+<div class="container" >
+  <h1>Home</h1>
+
+  <h2>Welcome <span th:text="${authUsername}" ></span></h2>
+
+
+
+  <div class="admin-home-div" th:if="${authLevel == '[ROLE_ADMIN]'}">
+    <a class="button-link" th:href="@{/admin/panel}">Go to admin panel</a>
+
+  </div>
+
+
+</div>
+</body>
+</html>
